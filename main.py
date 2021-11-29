@@ -26,14 +26,13 @@ def timing_button():
     time_12.place(x=230, y=90)
     time_18 = tk.Button(win, text="18 : 00", width=5, command=tt.count_time_18)
     time_18.place(x=330, y=90)
-    time_custom = tk.Button(win, text="自定义", width=5, command=tt.timingcustom)
-    time_custom.place(x=430, y=90)
+    time_custom_timing = tk.Button(win, text="自定义", width=5, command=tt.timingcustom)
+    time_custom_timing.place(x=430, y=90)
 
 
 # 倒计时关机
 def countdown_button():
     cdt = CountDownTime()
-    global time_custom
     countdown['state'] = tk.DISABLED
     time_15 = tk.Button(win, text="15min", width=5, command=cdt.count_time_15)
     time_15.place(x=30, y=130)
@@ -43,30 +42,50 @@ def countdown_button():
     time_60.place(x=230, y=130)
     time_90 = tk.Button(win, text="90min", width=5, command=cdt.count_time_90)
     time_90.place(x=330, y=130)
-    time_custom = tk.Button(win, text="自定义", width=5, command=cdt.count_custom)
-    time_custom.place(x=430, y=130)
+    time_custom_countdown = tk.Button(win, text="自定义", width=5, command=cdt.count_custom)
+    time_custom_countdown.place(x=430, y=130)
 
 
 # 取消关机
 def quitdown_button():
     quit_res = messagebox.askokcancel('取消关机提醒', message=f'确定要取消关机任务吗？')
     if quit_res:
-        res = subprocess.run("shutdown -a", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        res = subprocess.run("shutdown -a",
+                             shell=True,
+                             stdin=subprocess.PIPE,
+                             stdout=subprocess.PIPE,
+                             stderr=subprocess.PIPE)
         # if os.system("shutdown -a") == 1116:
         # print(res)
         if "returncode=1116" in str(res):
             messagebox.showerror(title="取消异常", message="该计算机暂无可取消的关机任务！")
         else:
             # 使用subprocess.run()执行cmd命令，去除黑窗口一闪而过
-            subprocess.run("shutdown -a", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            subprocess.run("shutdown -a",
+                           shell=True,
+                           stdin=subprocess.PIPE,
+                           stdout=subprocess.PIPE,
+                           stderr=subprocess.PIPE)
             # os.system("shutdown -a")
             messagebox.showinfo(title="取消提醒", message="已取消定时关机任务！")
 
 
 # 打开作者博客
 def authorblog():
-    subprocess.run("start www.cjlblog.vip", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    # os.system("start www.cjlblog.vip")
+    subprocess.run("start www.cjlblog.vip",
+                   shell=True,
+                   stdin=subprocess.PIPE,
+                   stdout=subprocess.PIPE,
+                   stderr=subprocess.PIPE)
+
+
+# 获取最新版
+def get_version():
+    subprocess.run("start https://github.com/cjladmin/Windows-shutdown",
+                   shell=True,
+                   stdin=subprocess.PIPE,
+                   stdout=subprocess.PIPE,
+                   stderr=subprocess.PIPE)
 
 
 if __name__ == '__main__':
@@ -113,12 +132,10 @@ if __name__ == '__main__':
     author = tk.Button(win, text="by Torres-圣君", font=('微软雅黑', 8), command=authorblog)
     author.place(x=415, y=175)
     # 版本号
-    version = tk.Label(win, text="版本：v1.0.1")
-    version.place(x=1, y=180)
+    version = tk.Button(win, text="版本号：v1.0.1", font=('微软雅黑', 8), command=get_version)
+    version.place(x=0, y=175)
     win.mainloop()
     try:
         os.remove('D:/favicon.ico')
-    except Exception:
-        pass
-
-    
+    except Exception as re:
+        print(re)
