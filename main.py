@@ -143,7 +143,10 @@ if __name__ == '__main__':
     version.place(x=0, y=175)
     win.mainloop()
     try:
-        os.remove('D:/favicon.ico')
+        try:
+            os.remove('D:/favicon.ico')
+        except Exception as re:
+            os.remove('favicon.ico')
+            print(re)
     except Exception as re:
-        os.remove('favicon.ico')
         print(re)
