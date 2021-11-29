@@ -89,10 +89,17 @@ def get_version():
 
 
 if __name__ == '__main__':
-    # 创建临时图片
-    tmp = open(r'D:/favicon.ico', 'wb')  # 创建临时的文件
-    tmp.write(base64.b64decode(favicon_ico))  # 把这个one图片解码出来，写入文件中去。
-    tmp.close()
+    try:
+        # 创建临时图片
+        tmp = open(r'D:/favicon.ico', 'wb')  # 创建临时的文件
+        tmp.write(base64.b64decode(favicon_ico))  # 把这个one图片解码出来，写入文件中去。
+        tmp.close()
+    except Exception as re:
+        # 创建到文件所在目录
+        tmp = open(r'favicon.ico', 'wb')  # 创建临时的文件
+        tmp.write(base64.b64decode(favicon_ico))  # 把这个one图片解码出来，写入文件中去。
+        tmp.close()
+        print(re)
 
     # 任务栏图标依赖
     myappid = "company.product.version"  # 这里可以设置任意文本
@@ -138,4 +145,5 @@ if __name__ == '__main__':
     try:
         os.remove('D:/favicon.ico')
     except Exception as re:
+        os.remove('favicon.ico')
         print(re)
