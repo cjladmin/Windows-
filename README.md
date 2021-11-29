@@ -1,4 +1,4 @@
-# Windows-shutdown
+# Windows-shutdown(v1.0.1)
 
 ## 实现Windows定时关机
 
