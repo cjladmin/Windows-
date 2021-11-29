@@ -28,7 +28,8 @@ def pic2py(picture_names, py_name):
 
 
 if __name__ == '__main__':
+    # 需要转码的图片：
     pics = ["favicon.ico"]
     # 将pics里面的图片写到 get_image.py 中
-    pic2py(pics, 'image')
-    print("ok")
+    pic2py(pics, 'get_image')
+    print("转码完成...")
