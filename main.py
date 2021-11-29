@@ -120,3 +120,5 @@ if __name__ == '__main__':
         os.remove('D:/favicon.ico')
     except Exception:
         pass
+
+    
