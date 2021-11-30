@@ -26,13 +26,13 @@ _✨ 基于 Tkinter 实现的可视化 Windows定时关机程序 ✨_
 
 # v1.0.1(2021/11/27)
 
-## 实现Windows定时关机
+### Windows定时关机程序：
 
  - 采用Tkinter实现可视化界面
 
 ![定时关机程序](https://user-images.githubusercontent.com/53791401/143844868-0b4bd4c0-0e93-4c65-9734-0af2be51d99e.jpg)
 
-## 功能展示：
+### 功能展示：
 
  - 定时关机
 
