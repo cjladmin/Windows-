@@ -18,6 +18,8 @@ class CountDownTime:
         self.day = tk.IntVar()  # 定义天数
         self.hour = tk.IntVar()  # 定义小时
         self.minute = tk.IntVar()  # 定义分钟
+        # 设置倒计时规则
+        self.res_flag = False
         pass
 
     # 设置条件，令该窗口只能被创建一次
@@ -72,24 +74,28 @@ class CountDownTime:
 
     def count_time_15(self):
         self.use_time_s(15)
-        messagebox.showinfo(title='关机提醒', message='该计算机将于00小时15分00秒后关机！')
+        if self.res_flag:
+            messagebox.showinfo(title='关机提醒', message='该计算机将于00小时15分00秒后关机！')
 
     def count_time_30(self):
         self.use_time_s(30)
-        messagebox.showinfo(title='关机提醒', message='该计算机将于00小时30分00秒后关机！')
+        if self.res_flag:
+            messagebox.showinfo(title='关机提醒', message='该计算机将于00小时30分00秒后关机！')
 
     def count_time_60(self):
         self.use_time_s(60)
-        messagebox.showinfo(title='关机提醒', message='该计算机将于01小时00分00秒后关机！')
+        if self.res_flag:
+            messagebox.showinfo(title='关机提醒', message='该计算机将于01小时00分00秒后关机！')
 
     def count_time_90(self):
         self.use_time_s(90)
-        messagebox.showinfo(title='关机提醒', message='该计算机将于01小时30分00秒后关机！')
+        if self.res_flag:
+            messagebox.showinfo(title='关机提醒', message='该计算机将于01小时30分00秒后关机！')
 
     # 15、30、60、90定时关机函数
     def use_time_s(self, use_time):
-        res = messagebox.askokcancel("关机提醒", message=f"确定要设置{use_time}分钟后关机吗？")
-        if res:
+        self.res_flag = messagebox.askokcancel("关机提醒", message=f"确定要设置{use_time}分钟后关机吗？")
+        if self.res_flag:
             time_s = use_time * 60
             # os.system(f"shutdown -s -t {time_s}")
             subprocess.run(f"shutdown -s -t {time_s}",
@@ -113,8 +119,8 @@ class CountDownTime:
                 messagebox.showinfo(title='关机提醒', message='该计算机将于%02d天%02d小时%02d分00秒后关机！' %
                                                           (self.day.get(), self.hour.get(), self.minute.get()))
             elif 7 < self.day.get() < 99 and 0 <= self.hour.get() < 24 and 0 <= self.minute.get() < 60:
-                res = messagebox.askokcancel("设置异常", message=f"兄弟，{self.day.get()}天......你这还需要关机？")
-                if res:
+                self.res_flag = messagebox.askokcancel("设置异常", message=f"兄弟，{self.day.get()}天......你这还需要关机？")
+                if self.res_flag:
                     time_m = (self.day.get() * 24 * 60 * 60) + (self.hour.get() * 60 * 60) + (self.minute.get() * 60)
                     # os.system(f"shutdown -s -t {time_m}")
                     subprocess.run(f"shutdown -s -t {time_m}",
