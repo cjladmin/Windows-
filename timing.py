@@ -29,6 +29,9 @@ class TimingTime:
         self.set_hour = tk.IntVar()     # 定义时
         self.set_min = tk.IntVar()      # 定义分
         self.set_second = tk.IntVar()   # 定义秒
+
+        self.new_month = self.month     # 用于计算新的月份
+        self.new_day = self.day         # 用于计算新的天数
         pass
 
     def timingcustom(self):
@@ -134,7 +137,7 @@ class TimingTime:
                 delta_time = str(delta).split(":")
                 # 获取现在到指定时间的秒数
                 set_timing = int(delta_time[0]) * 60 + int(delta_time[1]) * 60 + int(delta_time[2]) - msg_time - 1
-                # os.system(f"shutdown -s -t {set_timing}")
+                # os.system(f"Windows定时关机 -s -t {set_timing}")
                 subprocess.run(f"shutdown -s -t {set_timing}",
                                shell=True,
                                stdin=subprocess.PIPE,
@@ -150,22 +153,32 @@ class TimingTime:
             msg_time = msg_time_end - msg_time_start
             # 如果点确定则执行
             if res:
+                # 如果设置的时间以过，则天数+1
+                if (self.month != 1 or self.month != 2 or self.month != 3 or self.month != 5 or
+                        self.month != 7 or self.month != 8 or self.month != 10 or self.month != 12) and \
+                        self.day == 30:     # 如果月数不是1,2,3,5,7,8,10,12月，并且是第30天时，月份+1，天数归1
+                    self.new_month = self.month + 1
+                    self.new_day = 1
+                elif self.day == 31:        # 如果是第31天时，月份+1，天数归1
+                    self.new_month = self.month + 1
+                    self.new_day = 1
+                else:       # 否则，也就是不是每月的最后一天，则天数+1
+                    self.new_day = self.day + 1
                 # 获取当前时间
-                newday = self.day + 1
                 d1 = datetime.datetime.strptime(
                     f'{self.year}-{self.month}-{self.day} {self.hour}:{self.min}:{self.second}', '%Y-%m-%d %H:%M:%S')
                 # 获取设置的时间
-                d2 = datetime.datetime.strptime(f'{self.year}-{self.month}-{newday} {use_time}', '%Y-%m-%d %H:%M:%S')
+                d2 = datetime.datetime.strptime(f'{self.year}-{self.new_month}-{self.new_day} {use_time}', '%Y-%m-%d %H:%M:%S')
                 # 获取现在到指定时间需要的时间
                 delta = d2 - d1
                 delta_time = str(delta).split(":")
                 # 获取现在到指定时间的秒数
                 set_timing = int(delta_time[0]) * 60 * 60 + int(delta_time[1]) * 60 + int(delta_time[2]) - msg_time - 1
-                # os.system(f"shutdown -s -t {set_timing}")
+                # os.system(f"Windows定时关机 -s -t {set_timing}")
                 subprocess.run(f"shutdown -s -t {set_timing}",
                                shell=True,
                                stdin=subprocess.PIPE,
                                stdout=subprocess.PIPE,
                                stderr=subprocess.PIPE)
-                messagebox.showinfo(title='关机提醒', message=f'该计算机将于{self.month}月{newday}日 {use_time}关机！')
-                # print(set_timing)
+                messagebox.showinfo(title='关机提醒', message=f'该计算机将于{self.new_month}月{self.new_day}日 {use_time}关机！')
+                print(set_timing)
