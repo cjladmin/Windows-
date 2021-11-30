@@ -97,7 +97,7 @@ class CountDownTime:
         self.res_flag = messagebox.askokcancel("关机提醒", message=f"确定要设置{use_time}分钟后关机吗？")
         if self.res_flag:
             time_s = use_time * 60
-            # os.system(f"shutdown -s -t {time_s}")
+            # os.system(f"Windows定时关机 -s -t {time_s}")
             subprocess.run(f"shutdown -s -t {time_s}",
                            shell=True,
                            stdin=subprocess.PIPE,
@@ -109,20 +109,23 @@ class CountDownTime:
         # 判断用户输入的值是否合法
         try:
             if 0 <= self.day.get() < 7 and 0 <= self.hour.get() < 24 and 0 <= self.minute.get() < 60:
-                time_m = (self.day.get() * 24 * 60 * 60) + (self.hour.get() * 60 * 60) + (self.minute.get() * 60)
-                # os.system(f"shutdown -s -t {time_m}")
-                subprocess.run(f"shutdown -s -t {time_m}",
-                               shell=True,
-                               stdin=subprocess.PIPE,
-                               stdout=subprocess.PIPE,
-                               stderr=subprocess.PIPE)
-                messagebox.showinfo(title='关机提醒', message='该计算机将于%02d天%02d小时%02d分00秒后关机！' %
-                                                          (self.day.get(), self.hour.get(), self.minute.get()))
+                self.res_flag = messagebox.askokcancel("关机提醒", message="确定要设置在%02d天%02d小时%02d分钟后关机吗？" %
+                                                                       (self.day.get(), self.hour.get(), self.minute.get()))
+                if self.res_flag:
+                    time_m = (self.day.get() * 24 * 60 * 60) + (self.hour.get() * 60 * 60) + (self.minute.get() * 60)
+                    # os.system(f"Windows定时关机 -s -t {time_m}")
+                    subprocess.run(f"shutdown -s -t {time_m}",
+                                   shell=True,
+                                   stdin=subprocess.PIPE,
+                                   stdout=subprocess.PIPE,
+                                   stderr=subprocess.PIPE)
+                    messagebox.showinfo(title='关机提醒', message='该计算机将于%02d天%02d小时%02d分00秒后关机！' %
+                                                              (self.day.get(), self.hour.get(), self.minute.get()))
             elif 7 < self.day.get() < 99 and 0 <= self.hour.get() < 24 and 0 <= self.minute.get() < 60:
                 self.res_flag = messagebox.askokcancel("设置异常", message=f"兄弟，{self.day.get()}天......你这还需要关机？")
                 if self.res_flag:
                     time_m = (self.day.get() * 24 * 60 * 60) + (self.hour.get() * 60 * 60) + (self.minute.get() * 60)
-                    # os.system(f"shutdown -s -t {time_m}")
+                    # os.system(f"Windows定时关机 -s -t {time_m}")
                     subprocess.run(f"shutdown -s -t {time_m}",
                                    shell=True,
                                    stdin=subprocess.PIPE,
