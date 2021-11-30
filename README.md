@@ -6,8 +6,9 @@
 
 # Windows定时关机
 
-_✨ 基于tkinter X python实现的 Windows定时关机程序 ✨_
+_✨ 基于 Tkinter X Python实现的 Windows定时关机程序 ✨_
 
+</div>
 
 # v1.0.3(2021/11/30)
 
