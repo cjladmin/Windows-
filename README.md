@@ -6,7 +6,7 @@
 
 # Windows定时关机
 
-_✨ 基于 Tkinter X Python实现的 Windows定时关机程序 ✨_
+_✨ 基于 Tkinter 实现的可视化 Windows定时关机程序 ✨_
 
 </div>
 
