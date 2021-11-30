@@ -1,4 +1,29 @@
-# Windows-shutdown(v1.0.1)
+<p align="center">
+  <a href="https://github.com/cjladmin"><img src="https://avatars.githubusercontent.com/u/53791401?v=4" width="200" height="200" alt="nonebot"></a>
+</p>
+
+<div align="center">
+
+# Windows定时关机
+
+_✨ 基于tkinter X python实现的 Windows定时关机程序 ✨_
+
+
+# v1.0.3(2021/11/30)
+
+ - 修复了多次启用后程序报错
+ - 修复了自定义窗口点取消按钮后，再次点击无响应问题
+ - 新增自定义倒计时关机的提示对话框
+
+# v1.0.2(2021/11/28)
+
+ - 在主界面窗口中添加了版本号，以便查看源码
+ ![Windows定时关机](https://user-images.githubusercontent.com/53791401/144046035-94e4692a-9b56-4f37-aff9-5681852c36ae.jpg)
+
+ - 修复了自定义窗口可以无限打开
+ - 修复了任务栏图标偶尔不显示问题
+
+# v1.0.1(2021/11/27)
 
 ## 实现Windows定时关机
 
