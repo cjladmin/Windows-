@@ -108,7 +108,7 @@ class CountDownTime:
     def count_custom_time(self):
         # 判断用户输入的值是否合法
         try:
-            if 0 <= self.day.get() < 7 and 0 <= self.hour.get() < 24 and 0 <= self.minute.get() < 60:
+            if 0 <= self.day.get() <= 7 and 0 <= self.hour.get() < 24 and 0 <= self.minute.get() < 60:
                 self.res_flag = messagebox.askokcancel("关机提醒", message="确定要设置在%02d天%02d小时%02d分钟后关机吗？" %
                                                                        (self.day.get(), self.hour.get(), self.minute.get()))
                 if self.res_flag:
