@@ -108,10 +108,15 @@ if __name__ == '__main__':
     win = tk.Tk()
     # 设置窗口名称
     win.title("定时关机程序-(以北京时间为准)")
-    # 设置窗口图标
-    win.iconbitmap(default="D:/favicon.ico")
-    # 设置任务栏图标
-    win.wm_iconbitmap('D:/favicon.ico')
+    try:
+        # 设置窗口图标
+        win.iconbitmap(default="D:/favicon.ico")
+        # 设置任务栏图标
+        win.wm_iconbitmap('D:/favicon.ico')
+    except Exception as re:
+        win.iconbitmap(default="favicon.ico")
+        win.wm_iconbitmap('favicon.ico')
+        print(re)
     # 固定窗口大小
     win.resizable(0, 0)
     # 得到屏幕宽度
