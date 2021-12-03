@@ -139,4 +139,4 @@ class CountDownTime:
                 messagebox.showerror(title='设置异常', message='您的输入超出范围，请设置正确的值！')
         except Exception as re:
             messagebox.showerror(title='设置异常', message='您的输入有误，请输入正整数！')
-            print(re)
+            print("设置异常", re)
